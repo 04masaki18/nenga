@@ -8,7 +8,7 @@
     />
     <meta
       name="description"
-      content="元旦（Asia/Tokyoの1/1）だけ本編を表示する年賀状ページです。"
+      content="年賀状リンク用のシンプルなページです。"
     />
     <title>新年のご挨拶</title>
     <link rel="stylesheet" href="style.css" />
@@ -24,11 +24,16 @@
       </header>
 
       <main class="content">
-        <section id="main" class="panel" hidden>
+        <section id="main" class="panel">
           <h2>本編</h2>
           <p class="lead-sub">
-            元旦だけ公開されるムービーです。お好きな方法で埋め込めます。
+            年賀ムービーです。お好きな方法で埋め込めます。
           </p>
+
+          <div class="message">
+            <p class="message-title">メッセージ</p>
+            <p class="message-body">ここにご挨拶文を入れてください。</p>
+          </div>
 
           <div class="video-grid">
             <div class="video-card">
@@ -58,19 +63,6 @@
             </div>
           </div>
         </section>
-
-        <section id="waiting" class="panel">
-          <h2 id="waiting-title">準備中</h2>
-          <p id="waiting-message">
-            元旦（JST）だけ本編を表示します。公開までお待ちください。
-          </p>
-          <p id="waiting-date" class="meta">JST: --</p>
-          <noscript>
-            <p class="noscript">
-              JavaScript が無効のため日付判定ができません。元旦以外は準備中表示です。
-            </p>
-          </noscript>
-        </section>
       </main>
 
       <footer class="footer">
@@ -82,65 +74,16 @@
 
     <script>
       (() => {
-        const main = document.getElementById("main");
-        const waiting = document.getElementById("waiting");
-        const waitingTitle = document.getElementById("waiting-title");
-        const waitingMessage = document.getElementById("waiting-message");
-        const waitingDate = document.getElementById("waiting-date");
         const mainYear = document.getElementById("main-year");
         const footerYear = document.getElementById("footer-year");
+        const year = new Date().getFullYear();
 
-        if (!main || !waiting || !waitingTitle || !waitingMessage || !waitingDate) {
-          return;
+        if (mainYear) {
+          mainYear.textContent = String(year);
         }
-
-        const now = new Date();
-        const parts = new Intl.DateTimeFormat("ja-JP", {
-          timeZone: "Asia/Tokyo",
-          year: "numeric",
-          month: "numeric",
-          day: "numeric",
-        }).formatToParts(now);
-
-        const getPart = (type) => {
-          const found = parts.find((part) => part.type === type);
-          return found ? Number(found.value) : NaN;
-        };
-
-        const year = getPart("year");
-        const month = getPart("month");
-        const day = getPart("day");
-
-        if (!Number.isNaN(year)) {
-          if (mainYear) {
-            mainYear.textContent = String(year);
-          }
-          if (footerYear) {
-            footerYear.textContent = String(year);
-          }
+        if (footerYear) {
+          footerYear.textContent = String(year);
         }
-
-        const isJanFirst = month === 1 && day === 1;
-
-        if (isJanFirst) {
-          main.hidden = false;
-          waiting.hidden = true;
-        } else {
-          main.hidden = true;
-          waiting.hidden = false;
-        }
-
-        const status = month === 12 ? "準備中" : "終了";
-        waitingTitle.textContent = status;
-
-        if (status === "準備中") {
-          waitingMessage.textContent = `${year + 1}年1月1日（JST）に公開されます。`;
-        } else {
-          waitingMessage.textContent =
-            "本編の公開は終了しました。来年の元旦にまたお越しください。";
-        }
-
-        waitingDate.textContent = `JST: ${year}年${month}月${day}日`;
       })();
     </script>
   </body>
