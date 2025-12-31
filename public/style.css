@@ -40,7 +40,7 @@ body::after {
     rgba(255, 255, 255, 0.45),
     transparent 55%
   );
-  opacity: 0.5;
+  opacity: 0.35;
 }
 
 .page {
@@ -48,16 +48,16 @@ body::after {
   margin: 0 auto;
   padding: 48px 20px 36px;
   position: relative;
-  z-index: 1;
+  z-index: 2;
 }
 
 .photo-sprinkle {
   position: fixed;
   inset: 0;
-  z-index: 0;
+  z-index: 1;
   pointer-events: none;
   overflow: hidden;
-  opacity: 0.9;
+  opacity: 1;
 }
 
 .photo-sprinkle img {
@@ -67,9 +67,9 @@ body::after {
   width: var(--w, 140px);
   height: auto;
   transform: translate(-50%, -50%) rotate(var(--r, 0deg)) scale(var(--s, 1));
-  opacity: 0.16;
+  opacity: 0.28;
   border-radius: 14px;
-  filter: saturate(0.7) contrast(0.95) brightness(1.05);
+  filter: saturate(0.9) contrast(1.02) brightness(1.02);
   box-shadow: 0 10px 22px rgba(60, 40, 20, 0.12);
 }
 
@@ -149,11 +149,13 @@ p {
 }
 
 .panel {
-  background: var(--panel);
+  background: rgba(255, 250, 242, 0.9);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 28px;
   box-shadow: var(--shadow);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
   animation: rise 0.9s ease both;
 }
 
@@ -259,11 +261,11 @@ video {
   }
 
   .photo-sprinkle {
-    opacity: 0.7;
+    opacity: 0.85;
   }
 
   .photo-sprinkle img {
-    opacity: 0.12;
+    opacity: 0.22;
   }
 
   .footer {
