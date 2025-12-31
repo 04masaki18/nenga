@@ -81,6 +81,8 @@ body::after {
 
 .photo-rail img {
   width: min(var(--w, 280px), 100%);
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
   justify-self: center;
   border-radius: 16px;
   opacity: 0.9;
