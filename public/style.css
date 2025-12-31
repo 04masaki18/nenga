@@ -88,10 +88,7 @@ body::after {
   opacity: 0.9;
   filter: saturate(1.05) contrast(1.05);
   box-shadow: 0 12px 26px rgba(60, 40, 20, 0.14);
-  transform: translate(0, 0) rotate(var(--r, 0deg)) scale(var(--s, 1));
-  animation: drift var(--dur, 16s) ease-in-out infinite;
-  animation-delay: var(--delay, 0s);
-  will-change: transform;
+  transform: rotate(var(--r, 0deg)) scale(var(--s, 1));
 }
 
 
@@ -263,18 +260,6 @@ video {
   color: var(--accent-2);
 }
 
-@keyframes drift {
-  0%,
-  100% {
-    transform: translate(0, 0) rotate(var(--r, 0deg)) scale(var(--s, 1));
-  }
-  50% {
-    transform: translate(var(--tx, 18px), var(--ty, -14px))
-      rotate(calc(var(--r, 0deg) + 4deg))
-      scale(calc(var(--s, 1) + 0.03));
-  }
-}
-
 @keyframes rise {
   from {
     opacity: 0;
@@ -288,35 +273,26 @@ video {
 
 @media (max-width: 1024px) {
   .page {
-    grid-template-columns: 1fr;
-  }
-
-  .content-wrap {
-    grid-column: 1;
-    grid-row: 2;
+    grid-template-columns: minmax(120px, 0.85fr) minmax(0, 1fr)
+      minmax(120px, 0.85fr);
+    gap: 18px;
   }
 
   .photo-rail {
-    grid-column: 1;
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  }
-
-  .photo-rail.left {
-    grid-row: 1;
-  }
-
-  .photo-rail.right {
-    grid-row: 3;
+    gap: 20px;
   }
 
   .photo-rail img {
-    width: 100%;
+    width: min(var(--w, 220px), 100%);
   }
 }
 
 @media (max-width: 720px) {
   .page {
-    padding: 36px 16px 28px;
+    grid-template-columns: minmax(72px, 0.7fr) minmax(0, 1fr)
+      minmax(72px, 0.7fr);
+    gap: 12px;
+    padding: 28px 10px 36px;
   }
 
   .panel {
@@ -324,12 +300,12 @@ video {
   }
 
   .photo-rail {
-    gap: 18px;
+    gap: 14px;
   }
 
   .photo-rail img {
-    max-width: 200px;
-    opacity: 0.82;
+    width: min(var(--w, 160px), 100%);
+    opacity: 0.85;
   }
 
   .footer {
@@ -339,8 +315,7 @@ video {
 
 @media (prefers-reduced-motion: reduce) {
   .hero,
-  .panel,
-  .photo-rail img {
+  .panel {
     animation: none;
   }
 }
