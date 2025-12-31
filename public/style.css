@@ -51,6 +51,28 @@ body::after {
   z-index: 1;
 }
 
+.photo-sprinkle {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  opacity: 0.9;
+}
+
+.photo-sprinkle img {
+  position: absolute;
+  top: var(--y, 50%);
+  left: var(--x, 50%);
+  width: var(--w, 140px);
+  height: auto;
+  transform: translate(-50%, -50%) rotate(var(--r, 0deg)) scale(var(--s, 1));
+  opacity: 0.16;
+  border-radius: 14px;
+  filter: saturate(0.7) contrast(0.95) brightness(1.05);
+  box-shadow: 0 10px 22px rgba(60, 40, 20, 0.12);
+}
+
 .hero {
   text-align: center;
   padding: 20px 16px 8px;
@@ -234,6 +256,14 @@ video {
 
   .panel {
     padding: 22px 18px;
+  }
+
+  .photo-sprinkle {
+    opacity: 0.7;
+  }
+
+  .photo-sprinkle img {
+    opacity: 0.12;
   }
 
   .footer {
